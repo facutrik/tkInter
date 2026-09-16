@@ -1,21 +1,20 @@
-# main.py
-
 import tkinter as tk
-from tkinter import ttk
-
-from src.controllers.crud_controller import ControladorMemoriaCRUD
-from src.views.generic_view import VistaGenericaCRUD
+import ttkbootstrap as ttk 
+from ttkbootstrap.constants import *
+from src.controllers.crud import ControladorMemoriaCRUD
+from src.views.generico import VistaGenericaCRUD
 
 def main():
-    pantalla = tk.Tk()
-    pantalla.title("Sistema CRUD Genérico - Módulo Múltiple")
-    pantalla.geometry("600x550")
-    pantalla.minsize(550, 500)
+    pantalla = ttk.Window(
+        title="Sistema CRUD Genérico - Módulo Múltiple - Edición Rosario",
+        themename="darkly",
+        size=(1000, 650),
+        minsize=(800, 550)
+    )
+    pestañas = ttk.Notebook(pantalla, bootstyle="dark")
+    pestañas.pack(fill="both", expand=True, padx=10, pady=10)
 
-    pestañas = ttk.Notebook(pantalla)
-    pestañas.pack(fill="both", expand=True)
-
-    # --- INSTANCIACIÓN 1: VEHÍCULOS ---
+    #Vehiculos
     campos_vehiculos = [
         ("patente", "Patente / Dominio"),
         ("marca", "Marca"),
@@ -30,9 +29,9 @@ def main():
         campos=campos_vehiculos,
         controlador=controlador_vehiculos
     )
-    pestañas.add(vista_vehiculos, text="Vehículos")
+    pestañas.add(vista_vehiculos, text=" 🚗 VEHÍCULOS ")
 
-    # --- INSTANCIACIÓN 2: PROPIETARIOS ---
+    #Propietarios
     campos_propietarios = [
         ("dni", "DNI / CUIT"),
         ("nombre", "Nombre Completo"),
@@ -47,8 +46,7 @@ def main():
         campos=campos_propietarios,
         controlador=controlador_propietarios
     )
-    pestañas.add(vista_propietarios, text="Propietarios")
-
+    pestañas.add(vista_propietarios, text=" 👤 PROPIETARIOS ")
     pantalla.mainloop()
 
 if __name__ == "__main__":
