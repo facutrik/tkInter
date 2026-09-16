@@ -29,7 +29,7 @@ def main():
         campos=campos_vehiculos,
         controlador=controlador_vehiculos
     )
-    pestañas.add(vista_vehiculos, text=" 🚗 VEHÍCULOS ")
+    pestañas.add(vista_vehiculos, text=" VEHÍCULOS ")
 
     #Propietarios
     campos_propietarios = [
@@ -46,7 +46,7 @@ def main():
         campos=campos_propietarios,
         controlador=controlador_propietarios
     )
-    pestañas.add(vista_propietarios, text=" 👤 PROPIETARIOS ")
+    pestañas.add(vista_propietarios, text=" PROPIETARIOS ")
     pantalla.mainloop()
 
 if __name__ == "__main__":

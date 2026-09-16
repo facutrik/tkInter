@@ -27,13 +27,11 @@ class VistaGenericaCRUD(ttk.Frame):
             font=("Helvetica", 18, "bold"),
             bootstyle="primary"
         ).pack(side="left")
-
         #2 Formulario y Botones
         marco_izquierdo = ttk.Frame(self)
         marco_izquierdo.grid(row=1, column=0, sticky="nsew", padx=(0, 15))
         marco_formulario = ttk.LabelFrame(marco_izquierdo, text=" Datos del Registro ", padding=10, bootstyle="info")
         marco_formulario.pack(fill="x", pady=(0, 15))
-
         for i, (clave, etiqueta) in enumerate(self.campos):
             lbl = ttk.Label(marco_formulario, text=f"{etiqueta}:")
             lbl.grid(row=i*2, column=0, sticky="w", padx=5, pady=(5, 0))
@@ -41,27 +39,23 @@ class VistaGenericaCRUD(ttk.Frame):
             entrada.grid(row=i*2+1, column=0, sticky="ew", padx=5, pady=(0, 10))
             self.entradas[clave] = entrada
         marco_formulario.columnconfigure(0, weight=1)
-
         #3 Botones del CRUD
         marco_botones = ttk.LabelFrame(marco_izquierdo, text=" Acciones ", padding=10, bootstyle="secondary")
         marco_botones.pack(fill="x")
-
         # Botones
         for c in range(2): marco_botones.columnconfigure(c, weight=1)
-        ttk.Button(marco_botones, text="✚ Crear", bootstyle="success", command=self._al_crear).grid(row=0, column=0, padx=5, pady=5, sticky="ew")
-        ttk.Button(marco_botones, text="🖉 Actualizar", bootstyle="info", command=self._al_actualizar).grid(row=0, column=1, padx=5, pady=5, sticky="ew")
-        ttk.Button(marco_botones, text="🗑 Eliminar", bootstyle="danger", command=self._al_eliminar).grid(row=1, column=0, padx=5, pady=5, sticky="ew")
-        ttk.Button(marco_botones, text="🧹 Limpiar", bootstyle="secondary-outline", command=self.limpiar_campos).grid(row=1, column=1, padx=5, pady=5, sticky="ew")
-
+        ttk.Button(marco_botones, text="Crear", bootstyle="success", command=self._al_crear).grid(row=0, column=0, padx=5, pady=5, sticky="ew")
+        ttk.Button(marco_botones, text="Actualizar", bootstyle="info", command=self._al_actualizar).grid(row=0, column=1, padx=5, pady=5, sticky="ew")
+        ttk.Button(marco_botones, text="Eliminar", bootstyle="danger", command=self._al_eliminar).grid(row=1, column=0, padx=5, pady=5, sticky="ew")
+        ttk.Button(marco_botones, text="Limpiar", bootstyle="secondary-outline", command=self.limpiar_campos).grid(row=1, column=1, padx=5, pady=5, sticky="ew")
         #4 Tabla de Visualización
         marco_tabla = ttk.LabelFrame(self, text=" TABLA DE REGISTROS ", padding=5, bootstyle="primary")
         marco_tabla.grid(row=1, column=1, sticky="nsew")
         columnas = [campo[0] for campo in self.campos]
         self.tabla = ttk.Treeview(marco_tabla, columns=columnas, show="headings", bootstyle="primary", selectmode="browse")
-
         for clave, etiqueta in self.campos:
             self.tabla.heading(clave, text=etiqueta.upper())
-            self.tabla.column(clave, anchor="center") # Ancho automático
+            self.tabla.column(clave, anchor="center")
         self.tabla.pack(side="left", fill="both", expand=True)
         self.tabla.bind("<<TreeviewSelect>>", self._al_seleccionar_fila)
         barra_desplazamiento = ttk.Scrollbar(marco_tabla, orient="vertical", command=self.tabla.yview, bootstyle="primary-round")

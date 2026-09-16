@@ -22,16 +22,19 @@ class ControladorMemoriaCRUD:
             dni = registro["dni"].strip()
             if not dni.isdigit() or len(dni) < 7:
                 raise ValueError("El DNI debe contener únicamente números y tener al menos 7 dígitos.")
+
         #4 Nombre: al menos dos palabras
         if "nombre" in registro:
             palabras = [p for p in registro["nombre"].strip().split() if p]
             if len(palabras) < 2:
                 raise ValueError("El Nombre Completo debe contener al menos dos palabras (nombre y apellido).")
+
         #5 Teléfono: solo números
         if "telefono" in registro:
             telefono = registro["telefono"].strip()
             if not telefono.isdigit():
                 raise ValueError("El Teléfono debe contener únicamente números.")
+
         #6 Correo: contener @ y terminar en .com
         if "email" in registro:
             email = registro["email"].strip().lower()
